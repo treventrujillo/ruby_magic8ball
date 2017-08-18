@@ -1,5 +1,6 @@
 require "pry"
 
+#answer pool
 @answers = [
     "It is certain",
     "It is decidedly so",
@@ -19,22 +20,27 @@ require "pry"
     "Very doubtful"
   ]
 
+#clones answer pool to new array
 @user_answers = @answers.clone
 
+#copies new fresh array after resetting answers
 def initialize_answers
   @user_answers = @answers.clone
   display_menu
 end
 
+#resets user answer pool
 def reset_answers
   @user_answers.clear
   puts "Answers reset to default"
   initialize_answers
 end
 
+#adds answers to user answer pool
 def add_answers
   puts "Enter your answer: "
   input = gets.chomp
+  #if answer already exists, returns error message
   if @answers.include?(input) || @user_answers.include?(input)
     puts "Error: Answer Exists"
     add_answers
@@ -45,6 +51,7 @@ def add_answers
   end
 end
 
+#asks for another question to continue playing
 def play_again
   puts "Ask me another question or type 'quit' to exit."
   input = gets.chomp
@@ -65,6 +72,7 @@ def play_again
   end
 end
 
+#main menu
 def display_menu
   puts "*** MAGIC EIGHT BALL ***"
   puts "Welcome to the Magic Eight Ball,"
