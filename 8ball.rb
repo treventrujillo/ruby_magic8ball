@@ -35,13 +35,33 @@ end
 def add_answers
   puts "Enter your answer: "
   input = gets.chomp
-  if @answers.include?(input)
+  if @answers.include?(input) || @user_answers.include?(input)
     puts "Error: Answer Exists"
     add_answers
   else
     @user_answers << input
     puts "Answer Successfully Recorded"
     display_menu
+  end
+end
+
+def play_again
+  puts "Ask me another question or type 'quit' to exit."
+  input = gets.chomp
+  case input
+  when "quit"
+    exit
+  when "add_answers"
+    add_answers
+  when "reset_answers"
+    reset_answers
+  puts "Answers reset to default"
+    display_menu
+  when "print_answers"
+    puts @user_answers
+  else
+    puts "The Magic Eight Ball says: #{@user_answers.sample}"
+    play_again
   end
 end
 
@@ -65,7 +85,7 @@ def display_menu
     display_menu
   else
     puts "The Magic Eight Ball says: #{@user_answers.sample}"
-    display_menu
+    play_again
   end
 end
 display_menu
